@@ -38,24 +38,58 @@ function buildCharts(sample) {
     console.log(sampleObject);
 
     // Get the otu_ids, otu_labels, and sample_values
-    let otuIds = sampleObject.otu_ids.slice(0, 10);
-    let otuLabels = sampleObject.otu_labels.slice(0, 10);
-    let sampleValues = sampleObject.sample_values.slice(0, 10);
+    const otuIds = sampleObject.otu_ids;
+    const otuLabels = sampleObject.otu_labels;
+    const sampleValues = sampleObject.sample_values;
 
     // Build a Bubble Chart
+    var trace1 = {
+      x: otuIds,
+      y: sampleValues,
+      mode: 'markers',
+      marker: {
+        size: sampleValues
+      }
+    };
+
+    var data = [trace1];
+
+    var layout = {
+      title: 'Bacteria Cultures Per Sample',
+      showlegend: false,
+      height: 500,
+      width: 1000
+    };
+
 
 
     // Render the Bubble Chart
-
+    Plotly.newPlot('bubble', data, layout);
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
-
+    let yticks = otuIds.map(otuId => String(`OTU  ${otuId}`)).slice(0,10).reverse();
 
     // Build a Bar Chart
-    // Don't forget to slice and reverse the input data appropriately
+    var data = [{
+      type: 'bar',
+      y: yticks,
+      x: sampleValues.slice(0,10).reverse(),
+      orientation: 'h'
+    }];
+
+    var layout = {
+      title: "Top 10 Bacteria Cultures Found",
+      xaxis: { title: "Number of Bacteria" },
+      yaxis: { title: "OTU IDs",
+        height: 800,
+        width: 600
+      },
+      
+    };
 
 
     // Render the Bar Chart
+    Plotly.newPlot('bar', data, layout);
 
   });
 }
