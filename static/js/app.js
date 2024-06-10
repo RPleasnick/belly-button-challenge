@@ -1,7 +1,7 @@
 // Build the metadata panel
 function buildMetadata(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
-    console.log(sample)
+    console.log(sample);
     // get the metadata field
     let metadataField = data.metadata;
 
@@ -18,21 +18,29 @@ function buildMetadata(sample) {
     // Inside a loop, you will need to use d3 to append new
     // tags for each key-value in the filtered metadata.
 
+    Object.entries(metadataNum).forEach(([key, value]) => {
+      panel.append("p").text(`${key}: ${value}`);
+    });
+
+
   });
 }
 
 // function to build both charts
 function buildCharts(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
-
+    console.log(sample);
     // Get the samples field
-
+    let samplesField = data.samples;
 
     // Filter the samples for the object with the desired sample number
-
+    let sampleObject = samplesField.filter(item => item.id == sample)[0];
+    console.log(sampleObject);
 
     // Get the otu_ids, otu_labels, and sample_values
-
+    let otuIds = sampleObject.otu_ids.slice(0, 10);
+    let otuLabels = sampleObject.otu_labels.slice(0, 10);
+    let sampleValues = sampleObject.sample_values.slice(0, 10);
 
     // Build a Bubble Chart
 
