@@ -7,4 +7,4 @@ In the dropdown menu, a person's id can be chosen.  The demographic information 
 A bubble chart of "Bacteria Cultures Per Sample" is displayed with the bubble size illustates the number of bacteria for the selected id.
 A bar chart is displayed showing the top 10 bacteria cultures found for the selected id.
 
-The file _index.html_ uses the file \static\js\app.js"
+The link is https://rpleasnick.github.io/belly-button-challenge/
